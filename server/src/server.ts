@@ -3,6 +3,7 @@ import express, { Request, Response } from 'express';
 import path from 'path';
 import { promises as fs } from 'fs';
 import { v4 as uuidv4 } from 'uuid';
+import { fileURLToPath } from 'url';
 dotenv.config();
 
 // Import the routes
@@ -14,6 +15,8 @@ const app = express();
 const PORT = process.env.PORT || 3001;
 
 // Serve static files of entire client dist folder
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 app.use(express.static(path.join(__dirname, '../../client/dist')));
 
 // Implement middleware for parsing JSON and urlencoded form data
